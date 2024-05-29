@@ -1,0 +1,51 @@
+/* src/styles/App.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background-color: #333;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+nav ul li {
+  margin: 0;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+nav ul li a:hover {
+  background-color: #555;
+}
+
+h1 {
+  color: #333;
+}
+
+.product-list,
+.product-detail,
+.add-product-form,
+.manage-products {
+  margin: 2rem;
+}
+
+.product-list img {
+  max-width: 100px;
+  display: block;
+  margin-bottom: 1rem;
+}
