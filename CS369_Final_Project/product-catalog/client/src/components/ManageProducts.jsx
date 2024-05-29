@@ -1,6 +1,8 @@
 // src/components/ManageProducts.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/App.css';
+
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);

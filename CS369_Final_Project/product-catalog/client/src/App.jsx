@@ -7,10 +7,12 @@ import ProductDetail from './components/ProductDetail';
 import AddProductForm from './components/AddProductForm';
 import ManageProducts from './components/ManageProducts';
 import './styles/App.css'; // นำเข้าไฟล์ CSS
+import Header from './components/Header';
 
 const App = () => {
     return (
         <Router>
+            <Header title={"CS369 STORE"}/>
             <Navbar />
             <Routes>
                 <Route path="/" element={<ProductList />} />

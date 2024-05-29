@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { loadEnvFile } from 'process';
 
 const AddProductForm = () => {
     const navigate = useNavigate();
@@ -61,14 +62,18 @@ const AddProductForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-            {error && <div className="alert alert-danger">{error}</div>}
-            <input type="text" name="ProductName" value={product.ProductName} onChange={handleChange} placeholder="Product Name" required />
-            <input type="file" accept="image/*" name="picture" onChange={handleImageChange} required />
-            <input type="number" name="Price" value={product.Price} onChange={handleChange} placeholder="Product Price" required />
-            <textarea name="Description" value={product.Description} onChange={handleChange} placeholder="Product Description" required />
-            <button type="submit" className="btn btn-primary">Add Product</button>
+        <div><h1 style={{ textAlign: "center" }}>Add Product</h1>
+        <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data" style={{ width: '300px' }}>
+          {error && <div className="alert alert-danger">{error}</div>}
+          <input type="text" name="ProductName" value={product.ProductName} onChange={handleChange} placeholder="Product Name" required className="form-input" />
+          <input type="file" accept="image/*" name="picture" onChange={handleImageChange} required className="form-input" />
+          <input type="number" name="Price" value={product.Price} onChange={handleChange} placeholder="Product Price" required className="form-input" />
+          <textarea name="Description" value={product.Description} onChange={handleChange} placeholder="Product Description" required className="form-input" />
+          <button type="submit" className="btn btn-primary">Add Product</button>
         </form>
+      </div>
+      </div>
     );
 };
 

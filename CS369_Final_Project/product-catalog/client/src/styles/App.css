@@ -6,9 +6,24 @@ body {
   padding: 0;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 nav {
   background-color: #333;
-  padding: 1rem;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center; /* จัดให้อยู่ตรงกลางในแนวนอน */
+  align-items: center; /* จัดให้อยู่ตรงกลางในแนวดิ่ง */
+  animation: fadeIn 1s ease-in-out;
 }
 
 nav ul {
@@ -17,6 +32,7 @@ nav ul {
   margin: 0;
   display: flex;
   justify-content: space-around;
+  width: 100%; /* ทำให้ ul ขยายเต็มที่เพื่อให้ลิงก์กระจายตัว */
 }
 
 nav ul li {
@@ -27,14 +43,46 @@ nav ul li a {
   color: white;
   text-decoration: none;
   padding: 0.5rem 1rem;
+  border-radius: 5px; /* เพิ่มขอบมน */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* เพิ่มแอนิเมชัน */
 }
 
 nav ul li a:hover {
   background-color: #555;
+  transform: scale(1.05); /* เพิ่มแอนิเมชันเมื่อ hover */
 }
 
 h1 {
+  color: white;
+  background-color: #333;
+  border-radius: 0 20px 20px 0;
+  max-width: 450px;
+  padding: 10px 20px;
+  display: inline-block;
+  letter-spacing: 5px;
+  transition: letter-spacing 0.3s ease;
+  animation: fadeIn 1s ease-in-out;
+}
+
+h1:hover {
+  letter-spacing: 10px; /* เพิ่มความห่างระหว่างตัวอักษรเมื่อ hover */
+}
+
+.header {
+  background-color: #fff;
+  padding: 120px;
+  text-align: center;
+  font-size: 56px;
   color: #333;
+  letter-spacing: 5px; /* เพิ่มความห่างระหว่างตัวอักษร */
+  font-weight: bold;
+  opacity: 0; /* ตั้งค่าเริ่มต้นเป็น opacity: 0 เพื่อซ่อน header */
+  animation: fadeIn 1s forwards; /* เรียกใช้ keyframes animation เมื่อ header ปรากฏขึ้น */
+  transition: letter-spacing 0.3s ease; /* เพิ่ม transition เมื่อ hover */
+}
+
+.header:hover {
+  letter-spacing: 10px; /* เพิ่มความห่างระหว่างตัวอักษรเมื่อ hover */
 }
 
 .product-list,
@@ -49,3 +97,139 @@ h1 {
   display: block;
   margin-bottom: 1rem;
 }
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* จัดให้อยู่ตรงกลางในแนวนอน */
+  width: 90%; /* กำหนดความกว้างของ container */
+  margin: 0 auto; /* จัดให้อยู่ตรงกลางของหน้าจอ */
+}
+
+.product-card {
+  background-color: white; /* กำหนดพื้นหลังของสินค้าเป็นสีขาว */
+  padding: 20px; /* เพิ่มการเติมขอบของสินค้า */
+  border-radius: 20px; /* กำหนดขนาดของมุมเพื่อให้มีเส้นโค้งบางนิด */
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้กับสินค้า */
+  text-align: center; /* จัดให้อยู่ตรงกลางของรายการ */
+  width: calc(20% - 80px); /* กำหนดความกว้างของสินค้า โดยลบระยะห่างระหว่างสินค้าออก */
+  margin: 20px; /* กำหนดระยะห่างรอบๆ สินค้า */
+  transition: transform 0.3s ease; /* เพิ่มแอนิเมชันเมื่อ hover */
+  animation: fadeIn 1s ease-in-out;
+}
+
+.product-card img {
+  width: 150%; /* ปรับขนาดของรูปภาพให้เต็มกรอบ */
+  height: auto; /* ปรับสูงของรูปภาพให้ปรับตามอัตราส่วน */
+}
+
+.product-card:hover {
+  transform: scale(1.05); /* เพิ่มขนาดเมื่อ hover */
+}
+
+.product-card h2 {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+  transition: letter-spacing 0.3s ease;
+}
+
+.product-card h2:hover {
+  letter-spacing: 8px; /* ปรับระยะห่างเมื่อ hover */
+  color:darkred;
+  text-decoration: underline;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .product-card {
+    width: calc(25% - 40px); /* กำหนดความกว้างของสินค้าเป็น 4 คอลัมน์เมื่อหน้าจอแคบลง */
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .product-card {
+    width: calc(33.33% - 40px); /* กำหนดความกว้างของสินค้าเป็น 3 คอลัมน์เมื่อหน้าจอแคบลง */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .product-card {
+    width: calc(50% - 40px); /* กำหนดความกว้างของสินค้าเป็น 2 คอลัมน์เมื่อหน้าจอแคบลง */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .product-card {
+    width: calc(100% - 40px); /* กำหนดความกว้างของสินค้าเป็น 1 คอลัมน์เมื่อหน้าจอแคบลงมากกว่านี้ */
+  }
+}
+
+.form-input {
+  width: 200%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 28px;
+}
+
+.btn {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 28px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #ccc;
+}
+
+table {
+  width: 50%; /* กำหนดความกว้างของตาราง */
+  margin: 0 auto; /* จัดตารางให้อยู่ตรงกลาง */
+  border-collapse: collapse;
+  background-color: #fff; /* กำหนดพื้นหลังให้ตารางเป็นสีขาว */
+  font-size: 20px
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+.actions {
+  width: 100px; /* ปรับความกว้างของคอลัมน์ Actions */
+}
+
+.actions button {
+  margin: 0 auto; /* จัดให้ปุ่มอยู่ตรงกลางแนวนอน */
+  display: block; /* ทำให้ปุ่มเป็นบล็อกเลื่อนอยู่ตรงกลาง */
+}
+
+
+
+
+
+
+
+
