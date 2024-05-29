@@ -7,7 +7,7 @@ const Navbar = ({ isAuthenticated }) => {
         <nav>
             <ul>
                 {!isAuthenticated && <li><Link to="/">Login</Link></li>}
-                {isAuthenticated && <li><Link to="/productList">Product List</Link></li>}
+                {isAuthenticated && <li><Link to="/productList">Home</Link></li>}
                 {isAuthenticated && <li><Link to="/manage-products">Manage Products</Link></li>}
                 {isAuthenticated && <li><Link to="/add-product">Add Product</Link></li>}
             </ul>
