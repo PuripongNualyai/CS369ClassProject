@@ -43,10 +43,10 @@ const users = [
   });
   
 const dbConfig = {
-    server: 'localhost',
-    database: 'peerah',
-    user: 'sa',
-    password: 'Strong@P@ssw0rd',
+    server: 'database-3.crg8kusugrkv.us-east-1.rds.amazonaws.com',
+    database: 'productsweb',
+    user: 'admin',
+    password: 'perawat123',
     options: {
         encrypt: false,
         trustServerCertificate: true // Use true if you want to bypass server certificate validation.
