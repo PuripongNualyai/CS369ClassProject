@@ -40,72 +40,100 @@ fs.access(uploadPath, fs.constants.F_OK, (err) => {
     }
 });
 
-sql.connect(dbConfig).then(pool => {
+let pool;
+
+sql.connect(dbConfig).then(p => {
+    pool = p;
     if (pool.connected) {
         console.log('Connected to the database');
     }
-
-    app.get('/api/products', async (req, res) => {
-        try {
-            const result = await pool.request().query('SELECT * FROM Products');
-            res.json(result.recordset);
-        } catch (err) {
-            console.error('Error fetching products:', err);
-            res.status(500).send(err.message);
-        }
-    });
-
-    const storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, uploadPath);
-        },
-        filename: function (req, file, cb) {
-            const timestamp = Date.now();
-            const random = Math.floor(Math.random() * 10000); // Generate a random number between 0 and 9999
-            const fileName = `${timestamp}_${random}.jpg`; // Append ".jpg"
-            cb(null, fileName);
-        }
-    });
-
-    const upload = multer({ storage: storage });
-
-    app.post('/insert', upload.single('picture'), async (req, res) => {
-        console.log(req.file);
-
-        const pictureName = req.file ? req.file.filename : null; // Save only the filename, not the full path
-        
-        console.log('Received picture:', pictureName);
-
-        const { ProductName, Price, Description } = req.body;
-        try {
-            await pool.request()
-                .input('ProductName', sql.NVarChar, ProductName)
-                .input('ProductImage', sql.NVarChar, pictureName)
-                .input('Price', sql.Decimal, Price)
-                .input('Description', sql.NVarChar, Description)
-                .query(`INSERT INTO Products (ProductName, Price, ProductImage, Description)
-                        VALUES (@ProductName, @Price, @ProductImage, @Description)`);
-            res.send('Form data received and inserted into the database successfully!');
-        } catch (err) {
-            console.error('Error inserting product:', err);
-            res.status(500).send(err.message);
-        }
-    });
-
-    app.delete('/api/products/:id', async (req, res) => {
-        try {
-            await pool.request()
-                .input('id', sql.Int, req.params.id)
-                .query('DELETE FROM Products WHERE ProductID = @id');
-            res.status(200).send('Product deleted');
-        } catch (err) {
-            console.error('Error deleting product:', err);
-            res.status(500).send(err.message);
-        }
-    });
-
 }).catch(err => {
     console.error('Database connection failed', err);
+});
+
+// Make sure to check if the pool is initialized before handling requests
+const ensureDbConnection = (req, res, next) => {
+    if (!pool) {
+        return res.status(500).send('Database connection not established');
+    }
+    next();
+};
+
+app.use(ensureDbConnection);
+
+app.get('/api/products', async (req, res) => {
+    try {
+        const result = await pool.request().query('SELECT * FROM Products');
+        res.json(result.recordset);
+    } catch (err) {
+        console.error('Error fetching products:', err);
+        res.status(500).send(err.message);
+    }
+});
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadPath);
+    },
+    filename: function (req, file, cb) {
+        const timestamp = Date.now();
+        const random = Math.floor(Math.random() * 10000); // Generate a random number between 0 and 9999
+        const fileName = `${timestamp}_${random}.jpg`; // Append ".jpg"
+        cb(null, fileName);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/insert', upload.single('picture'), async (req, res) => {
+    console.log(req.file);
+
+    const picturePath = req.file ? req.file.filename : null; // Save only the filename, not the full path
+
+    console.log('Received picture:', picturePath);
+
+    const { ProductName, Price, Description } = req.body;
+    try {
+        await pool.request()
+            .input('ProductName', sql.NVarChar, ProductName)
+            .input('ProductImage', sql.NVarChar, picturePath)
+            .input('Price', sql.Decimal, Price)
+            .input('Description', sql.NVarChar, Description)
+            .query(`INSERT INTO Products (ProductName, Price, ProductImage, Description)
+                    VALUES (@ProductName, @Price, @ProductImage, @Description)`);
+        res.send('Form data received and inserted into the database successfully!');
+    } catch (err) {
+        console.error('Error inserting product:', err);
+        res.status(500).send(err.message);
+    }
+});
+
+app.delete('/api/products/:id', async (req, res) => {
+    try {
+        await pool.request()
+            .input('id', sql.Int, req.params.id)
+            .query('DELETE FROM Products WHERE ProductID = @id');
+        res.status(200).send('Product deleted');
+    } catch (err) {
+        console.error('Error deleting product:', err);
+        res.status(500).send(err.message);
+    }
+});
+
+app.get('/api/products/:id', async (req, res) => {
+    try {
+        const result = await pool.request()
+            .input('id', sql.Int, req.params.id)
+            .query('SELECT * FROM Products WHERE ProductID = @id');
+        if (result.recordset.length > 0) {
+            res.json(result.recordset[0]);
+        } else {
+            res.status(404).send('Product not found');
+        }
+    } catch (err) {
+        console.error('Error fetching product:', err);
+        res.status(500).send(err.message);
+    }
 });
 
 const PORT = process.env.PORT || 5000;

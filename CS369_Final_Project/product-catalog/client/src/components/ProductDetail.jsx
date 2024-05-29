@@ -1,4 +1,3 @@
-// src/components/ProductDetail.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -31,7 +30,7 @@ const ProductDetail = () => {
         <div>
             <h1>{product.ProductName}</h1>
             <img 
-                // src={`http://localhost:5000/${product.ProductImage}`} 
+                src={`http://localhost:5000/uploads/${product.ProductImage}`} 
                 alt={product.ProductName} 
                 style={{ width: '300px', height: 'auto' }}
             />
