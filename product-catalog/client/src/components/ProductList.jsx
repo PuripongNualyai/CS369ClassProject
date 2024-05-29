@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import api from './Api'; // Importing the custom api instance
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/products")
+    api
+      .get("/api/products")
       .then((response) => {
         setProducts(response.data);
       })

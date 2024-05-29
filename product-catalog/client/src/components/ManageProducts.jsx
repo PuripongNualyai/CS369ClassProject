@@ -1,8 +1,7 @@
 // src/components/ManageProducts.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from './Api'; // Importing the custom api instance
 import '../styles/App.css';
-
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
@@ -12,7 +11,7 @@ const ManageProducts = () => {
     }, []);
 
     const fetchProducts = () => {
-        axios.get('http://localhost:5000/api/products')
+        api.get('/api/products')
             .then(response => {
                 setProducts(response.data);
             })
@@ -22,7 +21,7 @@ const ManageProducts = () => {
     };
 
     const deleteProduct = (id) => {
-        axios.delete(`http://localhost:5000/api/products/${id}`)
+        api.delete(`/api/products/${id}`)
             .then(response => {
                 alert('Product deleted successfully');
                 fetchProducts();
