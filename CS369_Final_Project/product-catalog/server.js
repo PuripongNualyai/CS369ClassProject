@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 const dbConfig = {
-    server: 'REGIEREGEEE\\SQLEXPRESS',
+    server: 'localhost',
     database: 'peerah',
     user: 'sa',
     password: 'Strong@P@ssw0rd',
@@ -71,7 +71,7 @@ sql.connect(dbConfig).then(pool => {
     app.post('/insert', upload.single('picture'), async (req, res) => {
         console.log(req.file);
 
-        const picturePath = req.file ? req.file.fileName : null;
+        const picturePath = req.file ? req.file.filename : null;
         
         console.log('Received picture:', picturePath);
 

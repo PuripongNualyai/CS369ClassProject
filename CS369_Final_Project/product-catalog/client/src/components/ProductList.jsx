@@ -25,7 +25,7 @@ const ProductList = () => {
                 {products.map(product => (
                     <div key={product.ProductID} style={{ margin: '10px', border: '1px solid #ccc', padding: '10px' }}>
                         <Link to={`/product/${product.ProductID}`}>
-                            <img src={`http://localhost:5000/${product.ProductImage}`} alt={product.ProductName} style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                            <img src={`http://localhost:5000/uploads/${product.ProductImage}`} alt={product.ProductName} style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
                             <h2>{product.ProductName}</h2>
                             <p>{product.Price} THB</p>
                         </Link>
