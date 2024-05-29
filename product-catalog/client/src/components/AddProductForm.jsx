@@ -51,7 +51,7 @@ const AddProductForm = () => {
                     Description: ''
                 });
                 setPicture(null);
-                navigate('/');
+                navigate('/ProductList');
             } else {
                 throw new Error('Failed to add product');
             }
