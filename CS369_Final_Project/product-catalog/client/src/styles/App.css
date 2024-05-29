@@ -68,6 +68,21 @@ h1:hover {
   letter-spacing: 10px; /* เพิ่มความห่างระหว่างตัวอักษรเมื่อ hover */
 }
 
+.login-label {
+  color: #333;
+  font-size: 36px;
+  font-weight: bold;
+  max-width: 450px;
+  padding: 10px 20px;
+  display: inline-block;
+  letter-spacing: 5px;
+  transition: letter-spacing 0.3s ease;
+}
+
+.login-label:hover {
+  letter-spacing: 10px; /* เพิ่มความห่างระหว่างตัวอักษรเมื่อ hover */
+}
+
 .header {
   background-color: #fff;
   padding: 120px;
@@ -226,6 +241,98 @@ tr:hover {
   display: block; /* ทำให้ปุ่มเป็นบล็อกเลื่อนอยู่ตรงกลาง */
 }
 
+.login-container {
+  width: 400px; /* เพิ่มความกว้างของกล่อง */
+  height: 400px; /* เพิ่มความสูงของกล่อง */
+  position: fixed; /* ใช้ fixed แทน absolute */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  text-align: center; /* เพิ่มคำสั่งนี้ */
+}
+
+.login-container h2 {
+  font-size: 28px;
+  text-align: center;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.login-container label {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  width: 100%; /* กำหนดความกว้างของช่องกรอก */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 28px;
+}
+
+.login-container button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 28px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+  background-color: #555;
+}
+
+.product-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  height: 100vh; 
+  background-color: #f0f0f0; 
+  margin-top: 20px;
+  animation: fadeIn 1s ease-in-out;
+  transition: transform 0.3s ease; /* เพิ่มแอนิเมชันเมื่อ hover */
+}
+
+.product-detail-container:hover {
+  transform: scale(1.05); /* เพิ่มขนาดเมื่อ hover */
+}
+
+
+.product-detail-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 850px; 
+  margin: 20px auto; 
+  margin-top: 20px; 
+}
+
+.product-detail-content img {
+  width: 100%; 
+  height: auto;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 24px;
+}
 
 
 
